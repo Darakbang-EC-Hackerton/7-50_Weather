@@ -1,8 +1,3 @@
-# React + Vite
-
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+# 사용법
+1. 해당 페이지의 URL을 복사하여 새로운 폴더에 터미널로 접속하여 git clone 'URL'을 입력하세요
+2. 주석에 써있는 TO-DO와 notion에 있는 정보를 통합하여 문제를 해결하세요!
