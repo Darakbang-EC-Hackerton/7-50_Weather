@@ -11,20 +11,7 @@ export default function ForecastList({ forecastData }) {
   );
 }
 
+// To-Do: Props의 type을 지정해주세요!
 ForecastList.propTypes = {
-    forecastData: PropTypes.shape({
-      list: PropTypes.arrayOf(
-        PropTypes.shape({
-          dt_txt: PropTypes.string,
-          main: PropTypes.shape({
-            temp: PropTypes.number,
-          }),
-          weather: PropTypes.arrayOf(
-            PropTypes.shape({
-              description: PropTypes.string,
-            })
-          ),
-        })
-      ),
-    }),
+
 };
