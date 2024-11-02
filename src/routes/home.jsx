@@ -3,12 +3,14 @@ import React, { useState } from 'react';
 import SearchBar from "../components/SearchBar";
 import WeatherInfo from "../components/WeatherInfo";
 import ForecastList from "../components/ForecastList";
+import FavoriteList from "../components/FavoriteList";
 import { fetchWeatherData, fetchForecastData } from "../api";
 import './Home.css';
 
 export default function Home() {
     const [weatherData, setWeatherData] = useState(null);
     const [forecastData, setForecastData] = useState(null);
+    const [favorites, setFavorites] = useState([]);
 
     const handleSearch = async (city) => {
         try {
@@ -22,11 +24,24 @@ export default function Home() {
         }
     };
 
+    const addFavorite = (city) => {
+        if (!favorites.some(fav => fav.city === city)) {
+            setFavorites([...favorites, { city, weatherData }]);
+        }
+    };
+
+    const handleSelectCity = (city) => {
+        handleSearch(city);
+    };
+
     return (
-        <div>
+        <div >
+            <header>
+            <FavoriteList favorites={favorites} onSelectCity={handleSelectCity} />
             <SearchBar onSearch={handleSearch} />
-            <div className="container"> {/* Flexbox 컨테이너 */}
-                {weatherData && <WeatherInfo weatherData={weatherData} />}
+            </header>
+            <div className="container">
+                {weatherData && <WeatherInfo weatherData={weatherData} onAddFavorite={addFavorite} />}
                 {forecastData && <ForecastList forecastData={forecastData} />}
             </div>
         </div>
