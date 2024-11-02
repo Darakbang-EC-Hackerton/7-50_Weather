@@ -9,11 +9,22 @@ export default function Forecast() {
 // 2. State를 이용해서 Data를 관리해주세요
 // 3. Component에 적절한 값을 넘겨주세요
 
-    const handleForecast = async (city) => {
+const [forecastData, setForecastData] = useState(null);
 
-    }
-    return <>
-        <SearchBar onSearch={?} />
-        <ForecastList forecastData={?} />
-    </>
+const handleForecast = async (city) => {
+    try {
+    const data = await fetchForecastData(city);
+    setForecastData(data);
+    } catch (error) {
+    console.error("Error fetching forecast data:", error);
+}
+};
+
+
+    return (
+    <div>
+        <SearchBar onSearch={handleForecast} />
+        {forecastData && <ForecastList forecastData={forecastData} />}
+    </div>
+);
 }

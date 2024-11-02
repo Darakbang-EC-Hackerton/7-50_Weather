@@ -1,16 +1,34 @@
-import { useState } from "react";
+// src/routes/home.jsx
+import React, { useState } from 'react';
 import SearchBar from "../components/SearchBar";
 import WeatherInfo from "../components/WeatherInfo";
-import { fetchWeatherData } from "../api";
+import ForecastList from "../components/ForecastList";
+import { fetchWeatherData, fetchForecastData } from "../api";
+import './Home.css';
 
-export default function Home(){
-// To-Do: SearchBar와 WeatherInfo에 넘겨줄 data를 만들어주세요!
-// 1. api.js에 있는 함수를 이용해보세요
-// 2. State를 이용해서 Data를 관리해주세요
-// 3. Component에 적절한 값을 넘겨주세요
-    
-    return <>
-        <SearchBar onSearch={?} />
-        <?>
-    </>
+export default function Home() {
+    const [weatherData, setWeatherData] = useState(null);
+    const [forecastData, setForecastData] = useState(null);
+
+    const handleSearch = async (city) => {
+        try {
+            const weather = await fetchWeatherData(city);
+            setWeatherData(weather);
+
+            const forecast = await fetchForecastData(city);
+            setForecastData(forecast);
+        } catch (error) {
+            console.error("Error fetching weather data:", error);
+        }
+    };
+
+    return (
+        <div>
+            <SearchBar onSearch={handleSearch} />
+            <div className="container"> {/* Flexbox 컨테이너 */}
+                {weatherData && <WeatherInfo weatherData={weatherData} />}
+                {forecastData && <ForecastList forecastData={forecastData} />}
+            </div>
+        </div>
+    );
 }

@@ -6,13 +6,22 @@ export default function SearchBar({ onSearch }) {
   const [city, setCity] = useState('');
 
   const handleSearch = () => {
-
+    if (city.trim() !== '') {
+      onSearch(city);
+      setCity(''); 
+    }
   };
 
   return (
 // To-Do: 적절한 searchBar를 만들어보세요!
-    <div className={styles.searchBar}>
-
-    </div>
+<div id='SearchBar' className={styles.searchBar}>
+<input 
+  type="text" 
+  placeholder="찾고자 하는 도시 이름" 
+  value={city}
+  onChange={(e) => setCity(e.target.value)}
+/>
+<button onClick={handleSearch}>검색</button>
+</div>
   );
 }
